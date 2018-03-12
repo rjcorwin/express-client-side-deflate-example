@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Example</title>
+        <script type="text/javascript" src="bower_components/pako/dist/pako.js"></script>
+    </head>
+    <body>
+
+        <form id="inflateManuallyOnServerForm">
+            <button>
+                Click to use POST pako compressed data and have it inflated manually on the server.
+            </button>
+        </form>
+
+        <script>
+            window.inflateManuallyOnServerForm.addEventListener('submit', (event) => {
+                event.preventDefault()
+                fetch('/inflate-manually-on-server', {
+                    method: 'post',
+                    body: pako.deflate('hello world', { to: 'string' })
+                })
+            })
+        </script>
+
+        <form id="inflateAutomaticOnServerForm">
+            <button>
+                Click to use POST pako compressed data and have it inflated automatically on the server.
+            </button>
+        </form>
+
+        <script>
+            window.inflateAutomaticOnServerForm.addEventListener('submit', (event) => {
+                event.preventDefault()
+                fetch('/inflate-automatic-on-server', {
+                    headers: {
+                        'Content-Encoding': 'deflate'
+                    },
+                    method: 'post',
+                    body: pako.deflate('hello world', { to: 'string' })
+                })
+            })
+        </script>
+    </body>
+</html>
