@@ -33,10 +33,11 @@
                 event.preventDefault()
                 fetch('/inflate-automatic-on-server', {
                     headers: {
-                        'Content-Encoding': 'deflate'
+                        'Content-Encoding': 'deflate',
+                        'Content-Type': 'text/plain'
                     },
                     method: 'post',
-                    body: pako.deflate('hello world', { to: 'string' })
+                    body: pako.deflate('hello world')
                 })
             })
         </script>
